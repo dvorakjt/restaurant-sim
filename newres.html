@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Joe's Place</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <figure class="card mt-2 text-center border-0" style="background-color: #e9ecef">
+                    <div class="container">
+
+                        <div class="row">
+                            <div class="col">
+                                <h1 class="card-title border-bottom border-secondary p-3">Joe's Place</h1>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <h2 class="card-text p-3">We only have 5 tables left! Reserve one now:</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4"></div>
+                            <div class="col-2">
+                                <a href="/viewres"><button class="btn btn-primary my-3" id="viewRes">View All
+                                        Reservations</button></a>
+                            </div>
+                            <div class="col-2">
+                                <a href="/"><button class="btn btn-success py-3 px-5 my-3" id="home">Home</button></a>
+                            </div>
+                            <div class="col-4"></div>
+                        </div>
+                    </div>
+                </figure>
+                <figure class="card mt-2">
+                    <h6 class="card-title pl-1 py-2 bg-light border-bottom">Reserve a Table:</h6>
+                    <form>
+                        <div class="form-group m-2">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" placeholder="Enter your name." required>
+                        </div>
+                        <div class="form-group m-2">
+                            <label for="phone">Phone Number</label>
+                            <input type="text" class="form-control" id="phone" placeholder="(555)555-5555." required>
+                        </div>
+                        <div class="form-group m-2">
+                            <label for="email">Email Address</label>
+                            <input type="email" class="form-control" id="email" placeholder="newReservation@example.com"
+                                required>
+                        </div>
+                        <div class="form-group m-2">
+                            <label for="id">Unique ID</label>
+                            <input type="text" class="form-control" id="id" placeholder="Enter a unique ID." required>
+                        </div>
+                        <button type="submit" id="submitBtn" class="btn btn-primary">Submit</button>
+                    </form>
+                </figure>
+                <div class="row">
+                    <div class="col">
+                        <p><a href="/api/tables">API Table Link</a> | <a href="/api/waitlist">API Wait List</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js"
+        integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        //javascript
+        $("#submitBtn").on("click", (event) => {
+            event.preventDefault();
+            const newRes = {
+                name: $("#name").val().trim(),
+                phone: $("#phone").val().trim(),
+                email: $("#email").val().trim(),
+                id: $("#id").val().trim()
+            };
+
+            // make a post request
+            $.post("/api/customers", newRes)
+                .then(function (data) {
+                    console.log("newres.html", data);
+                    alert("Adding reservation...");
+                });
+        });
+    </script>
+</body>
+
+</html>
